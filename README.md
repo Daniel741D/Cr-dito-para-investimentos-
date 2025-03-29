@@ -14,7 +14,7 @@
             margin: 0;
         }
         .container {
-            background: white;
+            background: rgba(255, 255, 255, 0.9);
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -133,10 +133,10 @@
         }
 
         function enviarWhatsApp() {
-            var nome = document.getElementById("nome").value;
-            var email = document.getElementById("email").value;
-            var telefone = document.getElementById("telefone").value;
-            var cidade = document.getElementById("cidade").value;
+            var nome = document.getElementById("nome").value.trim();
+            var email = document.getElementById("email").value.trim();
+            var telefone = document.getElementById("telefone").value.trim();
+            var cidade = document.getElementById("cidade").value.trim();
             var investimento = document.getElementById("investimento").value;
             var valor = document.getElementById("valor").value;
             var parcela = document.getElementById("parcela").value;
@@ -146,16 +146,17 @@
                 return;
             }
 
-            var mensagem = `Olá, tenho interesse em Crédito para Investimento!
-            \nNome: ${nome}
-            \nE-mail: ${email}
-            \nTelefone: ${telefone}
-            \nCidade: ${cidade}
-            \nÁrea de Investimento: ${investimento}
-            \nValor do Investimento: R$ ${parseInt(valor).toLocaleString()}
-            \nValor da Parcela: R$ ${parseInt(parcela).toLocaleString()}`;
+            var mensagem = `Oi, meu nome é *${nome}*.  
+Tenho interesse em pegar um crédito para investimento.  
 
-            var url = `https://api.whatsapp.com/send?phone=5598984699652&text=${encodeURIComponent(mensagem)}`;
+📍 *Cidade:* ${cidade}  
+📩 *E-mail:* ${email}  
+📞 *Telefone:* ${telefone}  
+🏡 *Área de Investimento:* ${investimento}  
+💰 *Valor do Investimento:* R$ ${parseInt(valor).toLocaleString('pt-BR')}  
+💳 *Valor da Parcela:* R$ ${parseInt(parcela).toLocaleString('pt-BR')}`;
+
+            var url = `https://api.whatsapp.com/send?phone=5598981925728&text=${encodeURIComponent(mensagem)}`;
             window.open(url, "_blank");
         }
     </script>
