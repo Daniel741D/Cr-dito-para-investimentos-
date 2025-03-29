@@ -1,8 +1,7 @@
-<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crédito para Investimento</title>
     <style>
         body {
@@ -17,20 +16,13 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            max-width: 90%;
-            width: 400px;
+            max-width: 500px;
             margin: auto;
-        }
-        .logo {
-            width: 100%;
-            max-width: 250px;
-            margin-bottom: 20px;
         }
         label {
             font-weight: bold;
             display: block;
             margin-top: 10px;
-            text-align: left;
         }
         select, input {
             width: 100%;
@@ -38,28 +30,33 @@
             margin-top: 5px;
             border: 1px solid #ccc;
             border-radius: 5px;
+            font-size: 16px;
         }
         button {
             background-color: #28a745;
             color: white;
-            padding: 12px;
+            padding: 10px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             margin-top: 15px;
             width: 100%;
-            font-size: 16px;
+            font-size: 18px;
         }
         button:hover {
             background-color: #218838;
+        }
+        @media (max-width: 600px) {
+            .container {
+                width: 90%;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <img src="https://www.mediafire.com/view/s7272qwig8gnp8h/20250319_122205.png/file" class="logo" alt="Rod Lider Logo">
         <h2>Crédito para Investimento</h2>
-        <form onsubmit="enviarWhatsApp(event)">
+        <form id="creditoForm">
             <label for="nome">Seu Nome</label>
             <input type="text" id="nome" name="nome" required>
             
@@ -95,46 +92,45 @@
             
             <label for="parcela">Valor da Parcela</label>
             <select id="parcela" name="parcela">
-                <option value="">Selecione um valor de investimento primeiro</option>
+                <option value="">Selecione o valor do investimento primeiro</option>
             </select>
             
-            <button type="submit">Tenho interesse!</button>
+            <button type="button" onclick="enviarWhatsApp()">Tenho interesse!</button>
         </form>
     </div>
 
     <script>
         function atualizarParcelas() {
-            var valorInvestimento = document.getElementById("valor").value;
-            var parcelaSelect = document.getElementById("parcela");
-            parcelaSelect.innerHTML = ""; // Limpa as opções anteriores
+            var valor = document.getElementById("valor").value;
+            var parcela = document.getElementById("parcela");
+            parcela.innerHTML = "";
 
             var opcoesParcelas = {
-                "100000": [590, 650, 700, 890, 950, 1000],
-                "150000": [800, 900, 1000, 1200, 1500],
-                "250000": [1500, 1900, 2000, 2500, 3000],
-                "350000": [2500, 3000, 3500, 4000, 4500],
-                "500000": [4000, 5000, 6000, 7000, 8000],
-                "750000": [7000, 9000, 10000, 12000, 15000],
-                "1000000": [12000, 15000, 20000, 30000, 50000]
+                "100000": [590, 690, 800, 900, 1000],
+                "150000": [890, 950, 1200, 1500, 1900],
+                "250000": [1500, 2000, 2500, 3000, 3500],
+                "350000": [2000, 2500, 3000, 3500, 4000],
+                "500000": [3000, 4000, 5000, 6000, 7000],
+                "750000": [5000, 6000, 7000, 8000, 9000],
+                "1000000": [7000, 10000, 15000, 20000, 25000]
             };
 
-            if (opcoesParcelas[valorInvestimento]) {
-                opcoesParcelas[valorInvestimento].forEach(function(valor) {
+            if (valor in opcoesParcelas) {
+                opcoesParcelas[valor].forEach(function(p) {
                     var option = document.createElement("option");
-                    option.value = valor;
-                    option.textContent = "R$ " + valor.toLocaleString('pt-BR');
-                    parcelaSelect.appendChild(option);
+                    option.value = p;
+                    option.text = "R$ " + p.toLocaleString();
+                    parcela.appendChild(option);
                 });
             } else {
                 var option = document.createElement("option");
-                option.textContent = "Selecione um valor de investimento primeiro";
-                parcelaSelect.appendChild(option);
+                option.value = "";
+                option.text = "Selecione um valor válido";
+                parcela.appendChild(option);
             }
         }
 
-        function enviarWhatsApp(event) {
-            event.preventDefault();
-
+        function enviarWhatsApp() {
             var nome = document.getElementById("nome").value;
             var email = document.getElementById("email").value;
             var telefone = document.getElementById("telefone").value;
@@ -143,21 +139,23 @@
             var valor = document.getElementById("valor").value;
             var parcela = document.getElementById("parcela").value;
 
-            var mensagem = `Oi, meu nome é *${nome}*. 
-Tenho interesse em pegar um crédito para investimento.
+            if (!nome || !email || !telefone || !cidade || !investimento || !valor || !parcela) {
+                alert("Por favor, preencha todos os campos antes de enviar.");
+                return;
+            }
 
-📍 *Cidade:* ${cidade}  
-📩 *E-mail:* ${email}  
-📞 *Telefone:* ${telefone}  
-🏡 *Área de Investimento:* ${investimento}  
-💰 *Valor do Investimento:* R$ ${parseInt(valor).toLocaleString('pt-BR')}  
-💳 *Valor da Parcela:* R$ ${parseInt(parcela).toLocaleString('pt-BR')}`;
+            var mensagem = `Olá, tenho interesse em Crédito para Investimento!
+            \nNome: ${nome}
+            \nE-mail: ${email}
+            \nTelefone: ${telefone}
+            \nCidade: ${cidade}
+            \nÁrea de Investimento: ${investimento}
+            \nValor do Investimento: R$ ${parseInt(valor).toLocaleString()}
+            \nValor da Parcela: R$ ${parseInt(parcela).toLocaleString()}`;
 
             var url = `https://api.whatsapp.com/send?phone=5598984699652&text=${encodeURIComponent(mensagem)}`;
-            
             window.open(url, "_blank");
         }
     </script>
-
 </body>
 </html>
