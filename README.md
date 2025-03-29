@@ -6,140 +6,152 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f7f6;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        .container {
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 500px;
+            background-color: #f4f4f4;
             text-align: center;
+            padding: 20px;
         }
-
-        h1 {
-            font-size: 24px;
-            color: #333;
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin: auto;
+        }
+        .logo {
+            width: 200px;
             margin-bottom: 20px;
         }
-
-        input, select, button {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            font-size: 16px;
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
         }
-
+        select, input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
         button {
             background-color: #28a745;
             color: white;
+            padding: 10px;
             border: none;
+            border-radius: 5px;
             cursor: pointer;
+            margin-top: 15px;
+            width: 100%;
         }
-
         button:hover {
             background-color: #218838;
-        }
-
-        select {
-            background-color: #f8f9fa;
-        }
-
-        .form-section {
-            margin-bottom: 20px;
-        }
-
-        .section-title {
-            font-size: 18px;
-            color: #555;
-            margin-bottom: 8px;
-        }
-
-        .option-group {
-            display: flex;
-            justify-content: space-between;
-            gap: 10px;
-        }
-
-        .option-group select {
-            width: 48%;
         }
     </style>
 </head>
 <body>
-
     <div class="container">
-        <h1>Crédito para Investimento</h1>
-        <form id="form">
-            <div class="form-section">
-                <input type="text" name="nome" placeholder="Nome Completo" required>
-            </div>
-            <div class="form-section">
-                <input type="email" name="email" placeholder="E-mail" required>
-            </div>
-            <div class="form-section">
-                <input type="tel" name="telefone" placeholder="Telefone" required>
-            </div>
-            <div class="form-section">
-                <input type="text" name="cidade" placeholder="Cidade" required>
-            </div>
-            <div class="form-section">
-                <label class="section-title">Área de Investimento</label>
-                <select name="area" required>
-                    <option value="">Selecione a Área</option>
-                    <option value="Imóvel">Imóvel</option>
-                    <option value="Veículo">Veículo</option>
-                    <option value="Construção">Construção</option>
-                    <option value="Reforma">Reforma</option>
-                    <option value="Loja/Ponto Comercial">Loja/Ponto Comercial</option>
-                    <option value="Área Rural">Área Rural</option>
-                </select>
-            </div>
-            <div class="form-section option-group">
-                <div class="option">
-                    <label class="section-title">Valor Desejado</label>
-                    <select name="valor" required>
-                        <option value="">Selecione o Valor</option>
-                        <option value="100.000">R$ 100.000</option>
-                        <option value="150.000">R$ 150.000</option>
-                        <option value="200.000">R$ 200.000</option>
-                        <option value="250.000">R$ 250.000</option>
-                        <option value="300.000">R$ 300.000</option>
-                        <option value="350.000">R$ 350.000</option>
-                        <option value="500.000">R$ 500.000</option>
-                        <option value="1.000.000">R$ 1.000.000</option>
-                    </select>
-                </div>
-            </div>
-            <button type="button" onclick="sendWhatsApp()">Solicitar Crédito via WhatsApp</button>
+        <img src="https://drive.google.com/uc?export=view&id=1rUGbURzbha8HJhEiQpakvkRLhf9ot4UH" class="logo" alt="Rod Lider Logo">
+        <h2>Crédito para Investimento</h2>
+        <form onsubmit="enviarWhatsApp(event)">
+            <label for="nome">Seu Nome</label>
+            <input type="text" id="nome" name="nome" required>
+            
+            <label for="email">Seu E-mail</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="telefone">Seu Telefone</label>
+            <input type="tel" id="telefone" name="telefone" required>
+            
+            <label for="cidade">Cidade</label>
+            <input type="text" id="cidade" name="cidade" required>
+            
+            <label for="investimento">Área de Investimento</label>
+            <select id="investimento" name="investimento">
+                <option value="Área Rural">Área Rural</option>
+                <option value="Veículo">Veículo</option>
+                <option value="Imóvel">Imóvel</option>
+                <option value="Construção">Construção</option>
+                <option value="Reforma">Reforma</option>
+                <option value="Loja/Ponto Comercial">Loja/Ponto Comercial</option>
+            </select>
+            
+            <label for="valor">Valor do Investimento</label>
+            <select id="valor" name="valor" onchange="atualizarParcelas()">
+                <option value="100000">R$ 100.000</option>
+                <option value="150000">R$ 150.000</option>
+                <option value="250000">R$ 250.000</option>
+                <option value="350000">R$ 350.000</option>
+                <option value="500000">R$ 500.000</option>
+                <option value="750000">R$ 750.000</option>
+                <option value="1000000">R$ 1.000.000</option>
+            </select>
+            
+            <label for="parcela">Valor da Parcela</label>
+            <select id="parcela" name="parcela">
+                <option value="">Selecione um valor de investimento primeiro</option>
+            </select>
+            
+            <button type="submit">Tenho interesse!</button>
         </form>
     </div>
 
     <script>
-        function sendWhatsApp() {
-            const nome = document.querySelector('[name="nome"]').value;
-            const email = document.querySelector('[name="email"]').value;
-            const telefone = document.querySelector('[name="telefone"]').value;
-            const cidade = document.querySelector('[name="cidade"]').value;
-            const area = document.querySelector('[name="area"]').value;
-            const valor = document.querySelector('[name="valor"]').value;
+        function atualizarParcelas() {
+            var valorInvestimento = document.getElementById("valor").value;
+            var parcelaSelect = document.getElementById("parcela");
+            parcelaSelect.innerHTML = ""; // Limpa as opções anteriores
 
-            const message = `Oi, tenho interesse em Crédito para Investimento.\n\n- Nome: ${nome}\n- E-mail: ${email}\n- Telefone: ${telefone}\n- Cidade: ${cidade}\n- Área de Investimento: ${area}\n- Valor Desejado: ${valor}`;
-            const url = `https://wa.me/5598984699652?text=${encodeURIComponent(message)}`;
+            var opcoesParcelas = {
+                "100000": [590, 650, 700, 890, 950, 1000],
+                "150000": [800, 900, 1000, 1200, 1500],
+                "250000": [1500, 1900, 2000, 2500, 3000],
+                "350000": [2500, 3000, 3500, 4000, 4500],
+                "500000": [4000, 5000, 6000, 7000, 8000],
+                "750000": [7000, 9000, 10000, 12000, 15000],
+                "1000000": [12000, 15000, 20000, 30000, 50000]
+            };
+
+            if (opcoesParcelas[valorInvestimento]) {
+                opcoesParcelas[valorInvestimento].forEach(function(valor) {
+                    var option = document.createElement("option");
+                    option.value = valor;
+                    option.textContent = "R$ " + valor.toLocaleString('pt-BR');
+                    parcelaSelect.appendChild(option);
+                });
+            } else {
+                var option = document.createElement("option");
+                option.textContent = "Selecione um valor de investimento primeiro";
+                parcelaSelect.appendChild(option);
+            }
+        }
+
+        function enviarWhatsApp(event) {
+            event.preventDefault();
+
+            var nome = document.getElementById("nome").value;
+            var email = document.getElementById("email").value;
+            var telefone = document.getElementById("telefone").value;
+            var cidade = document.getElementById("cidade").value;
+            var investimento = document.getElementById("investimento").value;
+            var valor = document.getElementById("valor").value;
+            var parcela = document.getElementById("parcela").value;
+
+            var mensagem = `Oi, meu nome é *${nome}*. 
+Tenho interesse em pegar um crédito para investimento.
+
+📍 *Cidade:* ${cidade}  
+📩 *E-mail:* ${email}  
+📞 *Telefone:* ${telefone}  
+🏡 *Área de Investimento:* ${investimento}  
+💰 *Valor do Investimento:* R$ ${parseInt(valor).toLocaleString('pt-BR')}  
+💳 *Valor da Parcela:* R$ ${parseInt(parcela).toLocaleString('pt-BR')}`;
+
+            var url = `https://api.whatsapp.com/send?phone=5598984699652&text=${encodeURIComponent(mensagem)}`;
+            
             window.open(url, "_blank");
         }
     </script>
 
 </body>
 </html>
--
