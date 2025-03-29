@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -96,7 +97,7 @@
                 <option value="">Selecione o valor do investimento primeiro</option>
             </select>
             
-            <button type="button" onclick="enviarWhatsApp()">Tenho interesse!</button>
+            <button type="button" onclick="enviarWhatsApp()">Solicitar Crédito via WhatsApp</button>
         </form>
     </div>
 
@@ -129,6 +130,33 @@
                 option.text = "Selecione um valor válido";
                 parcela.appendChild(option);
             }
+        }
+
+        function enviarWhatsApp() {
+            var nome = document.getElementById("nome").value;
+            var email = document.getElementById("email").value;
+            var telefone = document.getElementById("telefone").value;
+            var cidade = document.getElementById("cidade").value;
+            var investimento = document.getElementById("investimento").value;
+            var valor = document.getElementById("valor").value;
+            var parcela = document.getElementById("parcela").value;
+
+            if (!nome || !email || !telefone || !cidade || !investimento || !valor || !parcela) {
+                alert("Por favor, preencha todos os campos antes de enviar.");
+                return;
+            }
+
+            var mensagem = `Olá, tenho interesse em Crédito para Investimento!
+            \nNome: ${nome}
+            \nE-mail: ${email}
+            \nTelefone: ${telefone}
+            \nCidade: ${cidade}
+            \nÁrea de Investimento: ${investimento}
+            \nValor do Investimento: R$ ${parseInt(valor).toLocaleString()}
+            \nValor da Parcela: R$ ${parseInt(parcela).toLocaleString()}`;
+
+            var url = `https://api.whatsapp.com/send?phone=5598984699652&text=${encodeURIComponent(mensagem)}`;
+            window.open(url, "_blank");
         }
     </script>
 </body>
