@@ -6,7 +6,8 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaNxe4-U4K6IoRpn3suhzqypIjc8LYXsom8xhF7uKM2JRfmKtlYK4nRgtU&s=10') no-repeat center center fixed;
+            background-size: cover;
             text-align: center;
             padding: 20px;
             margin: 0;
@@ -128,33 +129,6 @@
                 option.text = "Selecione um valor válido";
                 parcela.appendChild(option);
             }
-        }
-
-        function enviarWhatsApp() {
-            var nome = document.getElementById("nome").value;
-            var email = document.getElementById("email").value;
-            var telefone = document.getElementById("telefone").value;
-            var cidade = document.getElementById("cidade").value;
-            var investimento = document.getElementById("investimento").value;
-            var valor = document.getElementById("valor").value;
-            var parcela = document.getElementById("parcela").value;
-
-            if (!nome || !email || !telefone || !cidade || !investimento || !valor || !parcela) {
-                alert("Por favor, preencha todos os campos antes de enviar.");
-                return;
-            }
-
-            var mensagem = `Olá, tenho interesse em Crédito para Investimento!
-            \nNome: ${nome}
-            \nE-mail: ${email}
-            \nTelefone: ${telefone}
-            \nCidade: ${cidade}
-            \nÁrea de Investimento: ${investimento}
-            \nValor do Investimento: R$ ${parseInt(valor).toLocaleString()}
-            \nValor da Parcela: R$ ${parseInt(parcela).toLocaleString()}`;
-
-            var url = `https://api.whatsapp.com/send?phone=5598984699652&text=${encodeURIComponent(mensagem)}`;
-            window.open(url, "_blank");
         }
     </script>
 </body>
