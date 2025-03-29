@@ -1,7 +1,8 @@
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Crédito para Investimento</title>
     <style>
         body {
@@ -9,23 +10,27 @@
             background-color: #f4f4f4;
             text-align: center;
             padding: 20px;
+            margin: 0;
         }
         .container {
             background: white;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            max-width: 500px;
+            max-width: 90%;
+            width: 400px;
             margin: auto;
         }
         .logo {
-            width: 200px;
+            width: 100%;
+            max-width: 250px;
             margin-bottom: 20px;
         }
         label {
             font-weight: bold;
             display: block;
             margin-top: 10px;
+            text-align: left;
         }
         select, input {
             width: 100%;
@@ -37,12 +42,13 @@
         button {
             background-color: #28a745;
             color: white;
-            padding: 10px;
+            padding: 12px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             margin-top: 15px;
             width: 100%;
+            font-size: 16px;
         }
         button:hover {
             background-color: #218838;
@@ -51,7 +57,7 @@
 </head>
 <body>
     <div class="container">
-        <img src="https://drive.google.com/uc?export=view&id=1rUGbURzbha8HJhEiQpakvkRLhf9ot4UH" class="logo" alt="Rod Lider Logo">
+        <img src="https://www.mediafire.com/view/s7272qwig8gnp8h/20250319_122205.png/file" class="logo" alt="Rod Lider Logo">
         <h2>Crédito para Investimento</h2>
         <form onsubmit="enviarWhatsApp(event)">
             <label for="nome">Seu Nome</label>
